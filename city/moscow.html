@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Москва - Музеи мира</title>
+    <style>
+        html {
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 2px 0px 15px black;
+            width: 100%;
+            max-height: 100px;
+            height: 100%;
+            padding: 0px 20px;
+            z-index: 1000;
+        }
+
+        .header__intro {
+            background-image: url(../фото/header.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .header__title {
+            color: white;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, .5);
+            font-size: 15rem;
+        }
+
+        .header__nav {
+            margin: 0 100px;
+        }
+
+        span.nav__link:hover {
+            cursor: pointer;
+        }
+
+        .nav__link {
+            font-size: 2rem;
+        }
+
+        .nav__link:hover {
+            text-decoration: underline;
+        }
+
+        .nav__link,
+        .nav__list {
+            transition: all .2s;
+            padding: 15px 0px;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav__item:has(.nav__list) {
+            position: relative;
+        }
+
+        .nav__item .nav__list {
+            display: none;
+        }
+
+        .nav__item:hover>.nav__list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 30px;
+            padding: 20px;
+            left: 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 0px 15px rgb(180, 179, 179);
+        }
+
+        .title {
+            margin: 40px;
+        }
+
+        .title__heading {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title__paragraph {
+            font-size: 2rem;
+            text-align: justify;
+        }
+
+        .title__list li {
+            list-style: disc;
+            font-size: 2rem;
+        }
+
+        .title__list li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__paragraph:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__img {
+            border-radius: 20px;
+            width: 700px;
+            height: auto;
+        }
+
+        .title__float_left .title__img {
+            float: left;
+            margin: 0px 25px 10px 0px;
+        }
+
+        .title__float_right .title__img {
+            float: right;
+            margin: 0px 0px 10px 25px;
+        }
+
+        main section {
+            margin: 40px;
+        }
+
+        .article {
+            margin: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .article__info {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .article__info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .article__info ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-bottom: 5px;
+        }
+
+        .article__title {
+            font-size: 4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .article__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .article__date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .article__text {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .article__links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .article__link,
+        .article__link_text {
+            color: blue;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        .article__link:hover {
+            text-decoration: underline;
+        }
+
+        .article__link_text {
+            display: inline;
+        }
+
+        .article__float_left .article__img {
+            float: left;
+            margin-right: 20px;
+            border-radius: 20px;
+        }
+
+        .footer {
+            background-color: rgb(23 31 34);
+            padding: 30px;
+        }
+
+        .footer__text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .museum-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px;
+        }
+
+        .museum-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .museum-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .museum-card__image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .museum-card__title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .museum-card__description {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .museum-card__description p {
+            margin-bottom: 8px;
+        }
+
+        .museum-card__more {
+            font-size: 1.8rem;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+        }
+
+        .full-article {
+            margin: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+
+        .article-heading {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .article-content {
+            font-size: 2rem;
+            line-height: 1.7;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-content ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        .article-content li {
+            list-style: disc;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .museum-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px;
+            padding: 0 20px;
+        }
+
+        .view-source-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-source-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .back-to-cards-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-cards-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .current-museum-info {
+            font-size: 2rem;
+            color: #666;
+        }
+
+        .museum-cards.hide {
+            display: none;
+        }
+
+        .full-article {
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <div><img width="100" src="../фото/logo.png" alt="Логотип Музеи мира"></div>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="../Главная.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../великие музеи.html" class="nav__link">Великие музеи</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Статьи.html" class="nav__link">Статьи</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Живопись</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="../Живопись/Русская живопись.html" class="nav__link">Русская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Живопись/Испанская живопись.html" class="nav__link">Испанская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Живопись/Итальянская живопись.html" class="nav__link">Итальянская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Живопись/Голландская живопись.html" class="nav__link">Голландская живопись</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Скульптура.html" class="nav__link">Скульптура</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Города</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="./Барселона.html" class="nav__link">Барселона</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="./Лондон.html" class="nav__link">Лондон</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="./Москва.html" class="nav__link">Москва</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="./Париж.html" class="nav__link">Париж</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__intro">
+            <h1 class="header__title">Москва</h1>
+        </div>
+    </header>
+
+    <main class="main container">
+        <section class="title">
+            <h2 class="title__heading">Музеи Москвы</h2>
+            <p class="title__paragraph">На данной странице нашего сайта мы собрали большое количество действующих музеев Москвы и подробно описали их. Миллионы туристов приезжают в Москву, чтобы увидеть действительно красивые и исторические места. Такие поездки приносят массу удовольствия.</p>
+            <p class="title__paragraph">Если Вы никогда не были в Москве, но собираетесь туда, то для начала ознакомьтесь со всем перечнем музеев, который тут есть. Выберете для себя понравившиеся, запишите адреса и телефоны музеев, и не тратьте время - Вы найдете всю информацию у нас, вплоть до стоимости билетов и схем проезда.</p>
+        </section>
+
+        <div class="museum-cards" id="museumCards">
+            <div class="museum-card" data-museum="tretyakov">
+                <img src="../фото/galerey.jpg" alt="Третьяковская галерея" class="museum-card__image">
+                <h3 class="museum-card__title">Третьяковская галерея</h3>
+                <div class="museum-card__description">
+                    <p><strong>Основан:</strong> 1856 год</p>
+                    <p><strong>Основатель:</strong> Павел Третьяков</p>
+                    <p><strong>Коллекция:</strong> русское искусство от древности до современности</p>
+                </div>
+                <div class="museum-card__more">Подробнее...</div>
+            </div>
+
+            <div class="museum-card" data-museum="kremlin">
+                <img src="../фото/kreml.jpg" alt="Московский Кремль" class="museum-card__image">
+                <h3 class="museum-card__title">Московский Кремль</h3>
+                <div class="museum-card__description">
+                    <p><strong>Комплекс музеев:</strong> Оружейная палата, Алмазный фонд, соборы</p>
+                    <p><strong>Коллекция:</strong> царские регалии, исторические реликвии</p>
+                </div>
+                <div class="museum-card__more">Подробнее...</div>
+            </div>
+
+            <div class="museum-card" data-museum="pushkin">
+                <img src="../фото/puskin.jpeg" alt="Музей изобразительных искусств им. Пушкина" class="museum-card__image">
+                <h3 class="museum-card__title">Музей изобразительных искусств им. Пушкина</h3>
+                <div class="museum-card__description">
+                    <p><strong>Коллекция:</strong> зарубежное искусство от античности до XX века</p>
+                    <p><strong>Основан:</strong> 1912 год</p>
+                </div>
+                <div class="museum-card__more">Подробнее...</div>
+            </div>
+        </div>
+
+        <div id="fullArticlesContainer">
+            <div class="full-article" id="article-tretyakov">
+                <h2 class="article-heading">Третьяковская галерея</h2>
+                <div class="title__float_left">
+                    <img src="../фото/galerey.jpg" alt="Третьяковская галерея" class="title__img">
+                    <div class="article-content">
+                        <p>Один из самых известных музеев русского искусства в мире. Основанная купцом Павлом Третьяковым в 1856 году, галерея содержит богатейшую коллекцию русской живописи, иконописи и графики от древних времен до современности.</p>
+                        <p><strong>Адрес:</strong> Лаврушинский переулок, 10</p>
+                        <p><strong>Часы работы:</strong> 10:00 - 18:00 (вт, ср, вс), 10:00 - 21:00 (чт, пт, сб)</p>
+                        <p>История Третьяковской галереи началась в 1856 году, когда московский купец Павел Михайлович Третьяков приобрел первые картины русских художников для своей коллекции. В 1892 году он передал свое собрание вместе со зданием галереи в дар Москве.</p>
+                        <p><strong>Основные коллекции галереи:</strong></p>
+                        <ul>
+                            <li><strong>Древнерусское искусство</strong> - иконы XII-XVII веков, включая работы Андрея Рублева и Дионисия</li>
+                            <li><strong>Русская живопись XVIII - первой половины XIX века</strong> - произведения Д. Левицкого, В. Боровиковского, К. Брюллова, А. Иванова</li>
+                            <li><strong>Искусство второй половины XIX века</strong> - работы передвижников: И. Репина, В. Сурикова, И. Шишкина, И. Левитана</li>
+                            <li><strong>Русское искусство конца XIX - начала XX века</strong> - произведения В. Серова, М. Врубеля, художников "Мира искусства" и авангардистов</li>
+                            <li><strong>Советское искусство</strong> - картины 1920-1980-х годов</li>
+                        </ul>
+                        <p>Здание галереи в Лаврушинском переулке было построено в 1900-1905 годах по проекту художника В. Васнецова в русском стиле. Фасад украшен знаменитым "васнецовским" фризом с изображением московского герба.</p>
+                        <p>В 1985 году был открыт новый корпус галереи на Крымском Валу, где разместилась коллекция искусства XX века.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-article" id="article-kremlin">
+                <h2 class="article-heading">Московский Кремль</h2>
+                <div class="title__float_right">
+                    <img src="../фото/kreml.jpg" alt="Московский Кремль" class="title__img">
+                    <div class="article-content">
+                        <p>Исторический и культурный центр Москвы, включающий несколько музеев: Оружейную палату, Алмазный фонд, соборы Кремля. Здесь хранятся уникальные произведения искусства, царские регалии и исторические реликвии.</p>
+                        <p><strong>Адрес:</strong> Московский Кремль</p>
+                        <p><strong>Часы работы:</strong> 10:00 - 17:00 (кроме четверга)</p>
+                        <p>Московский Кремль - древнейшая часть Москвы, главный общественно-политический и историко-художественный комплекс города, официальная резиденция президента Российской Федерации.</p>
+                        <p><strong>Музеи Московского Кремля:</strong></p>
+                        <ul>
+                            <li><strong>Оружейная палата</strong> - музей-сокровищница, основанная в 1806 году. Здесь хранятся царские троны, коронационные платья, кареты, оружие, драгоценная посуда и другие предметы парадного царского обихода.</li>
+                            <li><strong>Алмазный фонд</strong> - выставка драгоценных камней и ювелирных изделий, включающая императорские регалии, уникальные самородки золота и платины, орденские знаки, светские украшения XVIII-XX веков.</li>
+                            <li><strong>Соборы Кремля</strong>:
+                                <ul>
+                                    <li>Успенский собор (1475-1479) - главный храм русского государства, место коронации императоров</li>
+                                    <li>Архангельский собор (1505-1508) - усыпальница русских князей и царей</li>
+                                    <li>Благовещенский собор (1484-1489) - домовая церковь русских великих князей и царей</li>
+                                </ul>
+                            </li>
+                            <li><strong>Патриаршие палаты</strong> - музей русской культуры XVII века с коллекцией предметов декоративно-прикладного искусства.</li>
+                        </ul>
+                        <p><strong>Знаменитые экспонаты:</strong></p>
+                        <ul>
+                            <li>Шапка Мономаха - символ русской государственности</li>
+                            <li>Двойной трон царей Ивана и Петра Алексеевичей</li>
+                            <li>Императорская корона Екатерины II</li>
+                            <li>Алмаз "Орлов" (189,62 карата) в скипетре Екатерины II</li>
+                            <li>Яйца Фаберже из коллекции императорской семьи</li>
+                        </ul>
+                        <p>Общая площадь музеев Кремля составляет около 28 000 м², а их коллекции насчитывают более 60 000 экспонатов.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-article" id="article-pushkin">
+                <h2 class="article-heading">Музей изобразительных искусств им. Пушкина</h2>
+                <div class="title__float_left">
+                    <img src="../фото/puskin.jpeg" alt="Музей изобразительных искусств им. Пушкина" class="title__img">
+                    <div class="article-content">
+                        <p>Крупнейший музей зарубежного искусства в России. В коллекции представлены произведения западноевропейской живописи, скульптуры, графики и декоративно-прикладного искусства от античности до XX века.</p>
+                        <p><strong>Адрес:</strong> ул. Волхонка, 12</p>
+                        <p><strong>Часы работы:</strong> 11:00 - 20:00 (вт, ср, сб, вс), 11:00 - 21:00 (чт, пт)</p>
+                        <p>Музей был основан в 1912 году как "Музей изящных искусств имени императора Александра III при Московском императорском университете". Инициатором создания и первым директором музея был профессор Московского университета Иван Цветаев (отец поэтессы Марины Цветаевой).</p>
+                        <p><strong>Основные коллекции музея:</strong></p>
+                        <ul>
+                            <li><strong>Искусство Древнего мира</strong> - памятники Древнего Египта, Ассирии, Урарту, Древней Греции и Рима</li>
+                            <li><strong>Искусство Средних веков и Возрождения</strong> - произведения итальянских, нидерландских, немецких и французских мастеров</li>
+                            <li><strong>Западноевропейская живопись XVII-XIX веков</strong> - работы Рембрандта, Рубенса, Пуссена, Ватто, Давида, Делакруа</li>
+                            <li><strong>Искусство Франции второй половины XIX - начала XX века</strong> - крупнейшая в России коллекция импрессионистов и постимпрессионистов</li>
+                            <li><strong>Графическая коллекция</strong> - более 350 000 произведений графики</li>
+                        </ul>
+                        <p><strong>Знаменитые произведения:</strong></p>
+                        <ul>
+                            <li>"Девочка на шаре" Пабло Пикассо</li>
+                            <li>"Красные виноградники в Арле" Винсента Ван Гога</li>
+                            <li>"Бульвар капуцинок в Париже" Клода Моне</li>
+                            <li>"Портрет Жанны Самари" Пьера Огюста Ренуара</li>
+                            <li>"Пьеро и Арлекин" Поля Сезанна</li>
+                            <li>"Золотая осень. Аржантёй" Альфреда Сислея</li>
+                        </ul>
+                        <p>Здание музея было построено в 1898-1912 годах по проекту архитектора Р. Клейна в неоклассическом стиле. В 1948 году к музею было присоединено собрание французской живописи из бывшего Музея нового западного искусства, что значительно обогатило его коллекцию.</p>
+                        <p>Сегодня музей включает несколько зданий: Главное здание на Волхонке, Галерею искусства стран Европы и Америки XIX-XX веков, Отдел личных коллекций и Учебный художественный музей.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="museum-controls" id="museumControls">
+            <div class="current-museum-info" id="currentMuseumInfo">
+                Выберите музей для просмотра подробной информации
+            </div>
+            <div>
+                <a href="#" class="view-source-btn" id="viewSourceBtn" style="display: none;">Смотреть в источнике</a>
+                <a href="#" class="back-to-cards-btn" id="backToCardsBtn" style="display: none;">← Вернуться к списку</a>
+            </div>
+        </div>
+
+        <section class="title">
+            <h2 class="title__heading">Другие известные музеи Москвы</h2>
+            <ul class="title__list">
+                <li><strong>Государственный исторический музей</strong> - крупнейший исторический музей России</li>
+                <li><strong>Музей современного искусства</strong> - коллекция русского и зарубежного искусства XX-XXI веков</li>
+                <li><strong>Политехнический музей</strong> - один из старейших научно-технических музеев мира</li>
+                <li><strong>Музей космонавтики</strong> - посвящен истории советской и российской космонавтики</li>
+                <li><strong>Бородинская панорама</strong> - музей-панорама Бородинской битвы 1812 года</li>
+                <li><strong>Дарвиновский музей</strong> - крупнейший естественнонаучный музей Европы</li>
+                <li><strong>Музей-заповедник "Царицыно"</strong> - архитектурно-парковый ансамбль XVIII века</li>
+            </ul>
+        </section>
+
+        <section class="title">
+            <p class="title__paragraph">Источник: <a href="https://muzei-mira.com/muzei_rossii/moscow/" class="article__link_text" target="_blank">https://muzei-mira.com/muzei_rossii/moscow/</a></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__text container">
+            <h3>Веб-программирование и дизайн на //vk.com/pechora_pro</h3>
+            <a href="https://vk.com/pechora_pro" target="_blank" style="color: white;">pechora_PRO</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const museumCards = document.getElementById('museumCards');
+            const fullArticlesContainer = document.getElementById('fullArticlesContainer');
+            const museumControls = document.getElementById('museumControls');
+            const viewSourceBtn = document.getElementById('viewSourceBtn');
+            const backToCardsBtn = document.getElementById('backToCardsBtn');
+            const currentMuseumInfo = document.getElementById('currentMuseumInfo');
+            
+            let currentMuseum = null;
+            const articles = {
+                'tretyakov': document.getElementById('article-tretyakov'),
+                'kremlin': document.getElementById('article-kremlin'),
+                'pushkin': document.getElementById('article-pushkin')
+            };
+            
+            const museumNames = {
+                'tretyakov': 'Третьяковская галерея',
+                'kremlin': 'Московский Кремль',
+                'pushkin': 'Музей изобразительных искусств им. Пушкина'
+            };
+            
+            document.querySelectorAll('.museum-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const museumId = this.getAttribute('data-museum');
+                    showMuseumArticle(museumId);
+                });
+            });
+            
+            function showMuseumArticle(museumId) {
+                currentMuseum = museumId;
+                
+                museumCards.classList.add('hide');
+                
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                if (articles[museumId]) {
+                    articles[museumId].classList.add('show');
+                }
+                
+                currentMuseumInfo.textContent = `Просмотр: ${museumNames[museumId]}`;
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'inline-block';
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: articles[museumId].offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            function showMuseumCards() {
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                museumCards.classList.remove('hide');
+                
+                currentMuseumInfo.textContent = 'Выберите музей для просмотра подробной информации';
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'none';
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: museumCards.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            backToCardsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showMuseumCards();
+            });
+            
+            viewSourceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+            
+            showMuseumCards();
+        });
+    </script>
+</body>
+
+</html>
