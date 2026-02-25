@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космическая битва</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .controls {
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .game-area {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            background-color: black;
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+        
+        #ship {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background-color: #2196F3;
+            bottom: 20px;
+            left: 370px;
+        }
+        
+        .asteroid {
+            position: absolute;
+            background-color: #8B4513;
+            border-radius: 50%;
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            flex-direction: column;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        
+        .key {
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>стражи галактики</h1>
+        
+        <div class="game-info">
+            <div>поинты: <span class="score" id="score">0</span></div>
+            <div>тайм: <span class="time" id="time">0</span> сек</div>
+            <div>астероиды: <span id="asteroidCount">0</span></div>
+        </div>
+        
+        <div class="controls">
+            <button id="startBtn" onclick="startGame()">старт гаме</button>
+            <button id="restartBtn" onclick="restartGame()" disabled>рестарт</button>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+            <div id="ship"></div>
+            <div class="game-over" id="gameOverScreen">
+                <h2>ГАМЕ ОВЕР</h2>
+                <p>поинты: <span id="finalScore">0</span></p>
+                <button onclick="restartGame()">рестарт</button>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>Управленя</h3>
+            <p>• влево: стрелка или клавиша A</p>
+            <p>• вправо: стрелка или клавиша D</p>
+            <p>• бойся астероидов</p>
+            <p>• за каждую секунду 10 очков</p>
+        </div>
+    </div>
+
+    <script>
+        let gameActive = false;
+        let score = 0;
+        let gameTime = 0;
+        let asteroids = [];
+        
+        const ship = document.getElementById('ship');
+        const gameArea = document.getElementById('gameArea');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const scoreElement = document.getElementById('score');
+        const timeElement = document.getElementById('time');
+        const asteroidCountElement = document.getElementById('asteroidCount');
+        const finalScoreElement = document.getElementById('finalScore');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        
+        let shipPosition = 370;
+        const shipSpeed = 10;
+        const gameWidth = 800;
+        const gameHeight = 500;
+        const shipWidth = 60;
+        const shipHeight = 40;
+        
+        let asteroidTimer;
+        let gameTimer;
+        let moveTimer;
+        
+        function startGame() {
+            if (gameActive) return;
+            
+            gameActive = true;
+            score = 0;
+            gameTime = 0;
+            asteroids = [];
+            
+            shipPosition = 370;
+            ship.style.left = shipPosition + 'px';
+            
+            updateUI();
+            gameOverScreen.style.display = 'none';
+            
+            startBtn.disabled = true;
+            restartBtn.disabled = false;
+            
+            gameTimer = setInterval(updateGame, 1000);
+            asteroidTimer = setInterval(createAsteroid, 1000);
+            moveTimer = setInterval(moveAsteroids, 50);
+            
+            document.addEventListener('keydown', moveShip);
+        }
+        
+        function updateGame() {
+            if (!gameActive) return;
+            
+            gameTime++;
+            score += 10;
+            
+            if (gameTime % 10 === 0) {
+                clearInterval(asteroidTimer);
+                let interval = Math.max(500, 1000 - gameTime * 20);
+                asteroidTimer = setInterval(createAsteroid, interval);
+            }
+            
+            updateUI();
+        }
+        
+        function updateUI() {
+            scoreElement.textContent = score;
+            timeElement.textContent = gameTime;
+            asteroidCountElement.textContent = asteroids.length;
+        }
+        
+        function moveShip(event) {
+            if (!gameActive) return;
+            
+            const key = event.key.toLowerCase();
+            
+            if (key === 'arrowleft' || key === 'a') {
+                shipPosition = Math.max(0, shipPosition - shipSpeed);
+            } else if (key === 'arrowright' || key === 'd') {
+                shipPosition = Math.min(gameWidth - shipWidth, shipPosition + shipSpeed);
+            }
+            
+            ship.style.left = shipPosition + 'px';
+        }
+        
+        function createAsteroid() {
+            if (!gameActive) return;
+            
+            const asteroid = document.createElement('div');
+            asteroid.className = 'asteroid';
+            
+            const size = Math.random() * 30 + 20;
+            asteroid.style.width = size + 'px';
+            asteroid.style.height = size + 'px';
+            
+            const leftPosition = Math.random() * (gameWidth - size);
+            asteroid.style.left = leftPosition + 'px';
+            asteroid.style.top = '-' + size + 'px';
+            
+            const speed = Math.random() * 3 + 2;
+            asteroid.dataset.speed = speed;
+            
+            gameArea.appendChild(asteroid);
+            asteroids.push({
+                element: asteroid,
+                speed: speed,
+                size: size
+            });
+        }
+        
+        function moveAsteroids() {
+            if (!gameActive) return;
+            
+            for (let i = asteroids.length - 1; i >= 0; i--) {
+                const asteroid = asteroids[i];
+                const currentTop = parseFloat(asteroid.element.style.top);
+                const newTop = currentTop + asteroid.speed;
+                
+                asteroid.element.style.top = newTop + 'px';
+                
+                if (checkCollision(asteroid)) {
+                    endGame();
+                    return;
+                }
+                
+                if (newTop > gameHeight) {
+                    asteroid.element.remove();
+                    asteroids.splice(i, 1);
+                }
+            }
+        }
+        
+        function checkCollision(asteroid) {
+            const asteroidRect = asteroid.element.getBoundingClientRect();
+            const shipRect = ship.getBoundingClientRect();
+            
+            return !(
+                asteroidRect.top > shipRect.bottom ||
+                asteroidRect.bottom < shipRect.top ||
+                asteroidRect.right < shipRect.left ||
+                asteroidRect.left > shipRect.right
+            );
+        }
+        
+        function endGame() {
+            if (!gameActive) return;
+            
+            gameActive = false;
+            
+            clearInterval(gameTimer);
+            clearInterval(asteroidTimer);
+            clearInterval(moveTimer);
+            
+            document.removeEventListener('keydown', moveShip);
+            
+            asteroids.forEach(asteroid => asteroid.element.remove());
+            asteroids = [];
+            
+            finalScoreElement.textContent = score;
+            gameOverScreen.style.display = 'flex';
+            
+            startBtn.disabled = false;
+            restartBtn.disabled = true;
+        }
+        
+        function restartGame() {
+            endGame();
+            setTimeout(startGame, 100);
+        }
+        
+        window.addEventListener('load', () => {
+            ship.style.left = shipPosition + 'px';
+        });
+    </script>
+</body>
+</html>
