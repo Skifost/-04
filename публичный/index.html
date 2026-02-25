@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование Express сервера</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Тестирование Express сервера</h1>
+        
+        <div class="section">
+            <h2>1. Тестирование GET запросов</h2>
+            <div class="test-box">
+                <button onclick="testGet()">Тест GET /api/data</button>
+                <button onclick="testGetEcho()">Тест GET /api/echo</button>
+                <input type="text" id="getMessage" placeholder="Сообщение для echo" value="Привет мир">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>2. Тестирование POST запросов</h2>
+            <div class="test-box">
+                <button onclick="testPost()">Тест POST /api/data</button>
+                <button onclick="testPostEcho()">Тест POST /api/echo</button>
+                <input type="text" id="postMessage" placeholder="Сообщение для echo" value="Тестовое сообщение">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>3. Тестирование ошибки 404</h2>
+            <div class="test-box">
+                <button onclick="test404()">Тест несуществующего URL</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Результаты</h2>
+            <pre id="results"></pre>
+        </div>
+        
+        <div class="section">
+            <h2>Примеры для тестирования через cURL</h2>
+            <code>
+                GET: curl "http://localhost:3000/api/data?name=John&age=25"<br>
+                POST: curl -X POST -H "Content-Type: application/json" -d '{"name":"Alice","age":30}' http://localhost:3000/api/data
+            </code>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
