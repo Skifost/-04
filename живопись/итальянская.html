@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Итальянская живопись - Музеи мира</title>
+    <style>
+        /* Ваш CSS код */
+        /* *Common */
+        html {
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+
+        /* *Header */
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 2px 0px 15px black;
+            width: 100%;
+            max-height: 100px;
+            height: 100%;
+            padding: 0px 20px;
+            z-index: 1000;
+        }
+
+        .header__intro {
+            background-image: url(../фото/header.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .header__title {
+            color: white;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, .5);
+            font-size: 15rem;
+        }
+
+
+        /* *Nav */
+        .header__nav {
+            margin: 0 100px;
+        }
+
+        span.nav__link:hover {
+            cursor: pointer;
+        }
+
+        .nav__link {
+            font-size: 2rem;
+        }
+
+        .nav__link:hover {
+            text-decoration: underline;
+        }
+
+        .nav__link,
+        .nav__list {
+            transition: all .2s;
+            padding: 15px 0px;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 25px;
+        }
+
+        /* Inner List */
+        .nav__item:has(.nav__list) {
+            position: relative;
+        }
+
+        .nav__item .nav__list {
+            display: none;
+        }
+
+        .nav__item:hover>.nav__list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 30px;
+            padding: 20px;
+            left: 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 0px 15px rgb(180, 179, 179);
+        }
+
+
+        /* *Title */
+        .title {
+            margin: 40px;
+        }
+
+        .title__heading {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title__paragraph {
+            font-size: 2rem;
+            text-align: justify;
+        }
+
+        .title__list li {
+            list-style: disc;
+            font-size: 2rem;
+        }
+
+        .title__list li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__paragraph:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__img {
+            border-radius: 20px;
+            width: 700px;
+            height: auto;
+        }
+
+        .title__float_left .title__img {
+            float: left;
+            margin: 0px 25px 10px 0px;
+        }
+
+        .title__float_right .title__img {
+            float: right;
+            margin: 0px 0px 10px 25px;
+        }
+
+
+        /* *Main */
+        main section {
+            margin: 40px;
+        }
+
+
+        /* *Article */
+        .article {
+            margin: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .article__info {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .article__info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .article__info ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-bottom: 5px;
+        }
+
+        .article__title {
+            font-size: 4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .article__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .article__date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .article__text {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .article__links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .article__link,
+        .article__link_text {
+            color: blue;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        .article__link:hover {
+            text-decoration: underline;
+        }
+
+        .article__link_text {
+            display: inline;
+        }
+
+        .article__float_left .article__img {
+            float: left;
+            margin-right: 20px;
+            border-radius: 20px;
+        }
+
+        /* *Footer */
+        .footer {
+            background-color: rgb(23 31 34);
+            padding: 30px;
+        }
+
+        .footer__text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Стили для карточек художников */
+        .artist-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px;
+        }
+
+        .artist-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .artist-card__image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .artist-card__title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .artist-card__details {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .artist-card__details p {
+            margin-bottom: 8px;
+        }
+
+        .artist-card__museums {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .artist-card__museums li {
+            list-style: disc;
+            margin-bottom: 6px;
+            font-size: 1.8rem;
+        }
+
+        .artist-card__more {
+            font-size: 1.8rem;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+        }
+
+        /* Стили для полных статей */
+        .full-article {
+            margin: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+
+        .article-heading {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .article-content {
+            font-size: 2rem;
+            line-height: 1.7;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-content ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        .article-content li {
+            list-style: disc;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        /* Кнопки управления */
+        .artist-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px;
+            padding: 0 20px;
+        }
+
+        .view-source-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-source-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .back-to-cards-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-cards-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .current-artist-info {
+            font-size: 2rem;
+            color: #666;
+        }
+
+        /* Скрытие элементов */
+        .artist-cards.hide {
+            display: none;
+        }
+
+        .full-article {
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <div><img width="100" src="../фото/logo.png" alt="Логотип Музеи мира"></div>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="../Главная.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../великие музеи.html" class="nav__link">Великие музеи</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Статьи.html" class="nav__link">Статьи</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Живопись</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="русская живопись.html" class="nav__link">Русская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="испанская живопись.html" class="nav__link">Испанская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="итальянская живопись.html" class="nav__link">Итальянская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="голландская живопись.html" class="nav__link">Голландская живопись</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Скульптура.html" class="nav__link">Скульптура</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Города</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="../Города/Барселона.html" class="nav__link">Барселона</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Лондон.html" class="nav__link">Лондон</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Москва.html" class="nav__link">Москва</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Париж.html" class="nav__link">Париж</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__intro">
+            <h1 class="header__title">Итальянская живопись</h1>
+        </div>
+    </header>
+
+    <main class="main container">
+        <section class="title">
+            <h2 class="title__heading">Великие итальянские художники</h2>
+            <p class="title__paragraph">Итальянская живопись - это целая эпоха в истории мирового искусства. Италия подарила миру величайших мастеров, чьи работы стали эталоном художественного совершенства и вдохновляют поколения художников по сей день.</p>
+        </section>
+
+        <!-- Карточки художников -->
+        <div class="artist-cards" id="artistCards">
+            <!-- Карточка Леонардо да Винчи -->
+            <div class="artist-card" data-artist="davinci">
+                <img src="../фото/Да Винчи.jpg" alt="Леонардо Да Винчи" class="artist-card__image">
+                <h3 class="artist-card__title">Леонардо Да Винчи</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 15 апреля 1452 г.</p>
+                    <p><strong>Дата смерти:</strong> 2 мая 1519 г.</p>
+                    <p><strong>Страна:</strong> Италия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Эрмитаж</li>
+                        <li>Лувр</li>
+                        <li>Национальная галерея искусств (Вашингтон)</li>
+                        <li>Галерея Уффици</li>
+                        <li>Галерея Академии</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+
+            <!-- Карточка Микеланджело -->
+            <div class="artist-card" data-artist="michelangelo">
+                <img src="../фото/Микиланджело.jpg" alt="Микеланджело Буонарроти" class="artist-card__image">
+                <h3 class="artist-card__title">Микеланджело Буонарроти</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 6 марта 1475 г.</p>
+                    <p><strong>Дата смерти:</strong> 18 февраля 1564 г.</p>
+                    <p><strong>Страна:</strong> Италия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Сикстинская капелла</li>
+                        <li>Галерея Уффици</li>
+                        <li>Музей Ватикана</li>
+                        <li>Лувр</li>
+                        <li>Британский музей</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+
+            <!-- Карточка Рафаэля -->
+            <div class="artist-card" data-artist="raphael">
+                <img src="../фото/Рафаэль Санти.jpg" alt="Рафаэль Санти" class="artist-card__image">
+                <h3 class="artist-card__title">Рафаэль Санти</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 28 марта 1483 г.</p>
+                    <p><strong>Дата смерти:</strong> 6 апреля 1520 г.</p>
+                    <p><strong>Страна:</strong> Италия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Музеи Ватикана</li>
+                        <li>Галерея Уффици</li>
+                        <li>Лувр</li>
+                        <li>Прадо</li>
+                        <li>Национальная галерея (Лондон)</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+        </div>
+
+        <!-- Контейнер для полных статей -->
+        <div id="fullArticlesContainer">
+            <!-- Полная статья Леонардо да Винчи -->
+            <div class="full-article" id="article-davinci">
+                <h2 class="article-heading">Леонардо Да Винчи</h2>
+                <div class="title__float_left">
+                    <img src="../фото/Да Винчи.jpg" alt="Леонардо Да Винчи" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 15 апреля 1452 г.</p>
+                        <p><strong>Дата смерти:</strong> 2 мая 1519 г.</p>
+                        <p><strong>Страна:</strong> Италия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Эрмитаж</li>
+                            <li>Лувр</li>
+                            <li>Национальная галерея искусств (Вашингтон)</li>
+                            <li>Галерея Уффици</li>
+                            <li>Галерея Академии</li>
+                        </ul>
+                        <p>Леонардо да Винчи смело можно отнести к уникальным людям нашей планеты... Ведь он известен не только как один из величайших художников и скульпторов Италии, а также как величайший ученый, исследователь, инженер, химик, анатом, ботаник, философ, музыкант и поэт. Его творения, открытия и исследования не на одну эпоху опередили время.</p>
+                        <p>Леонардо да Винчи был рожден 15 апреля 1452 года недалеко от Флоренции, в городе Винчи (Италия). Про мать да Винчи, известно довольно мало информации, только то что она была крестьянкой, не состояла с отцом Леонардо в браке и до 4-х лет занималась воспитанием сына в деревне, после чего он был переправлен в семью отца. А вот отец Леонардо, Пьеро Винчи, был довольно богатым гражданином, работал нотариусом, а также имел в своем владении земли и титул мессэра.</p>
+                        <p>Леонардо да Винчи начальное образование, в которое входило умение писать, читать, основы математики и латыни получал на дому. Для многих была интересной его манера писать в зеркальном отражении слева направо. Хотя при необходимости мог без особого труда писать и традиционно.</p>
+                        <p>В 1469 году сын вместе с отцом переезжает во Флоренцию, где Леонардо начинает изучать профессию художника, не самую почитаемую в то время, хотя у Пьеро и было желание, чтобы сын унаследовал профессию нотариуса.</p>
+                        <p>Но в то время незаконнорожденный не мог быть ни врачом ни юристом. И уже в 1472 году Леонардо принимают в гильдию живописцев Флоренции, а в 1473 году написана самая первая датированная работа Леонардо да Винчи. На этом пейзаже был изображен набросок долины реки.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Полная статья Микеланджело -->
+            <div class="full-article" id="article-michelangelo">
+                <h2 class="article-heading">Микеланджело Буонарроти</h2>
+                <div class="title__float_right">
+                    <img src="../фото/Микиланджело.jpg" alt="Микеланджело Буонарроти" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 6 марта 1475 г.</p>
+                        <p><strong>Дата смерти:</strong> 18 февраля 1564 г.</p>
+                        <p><strong>Страна:</strong> Италия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Сикстинская капелла</li>
+                            <li>Галерея Уффици</li>
+                            <li>Музей Ватикана</li>
+                            <li>Лувр</li>
+                            <li>Британский музей</li>
+                        </ul>
+                        <p>Микеланджело Буонарроти - один из величайших мастеров эпохи Возрождения, гениальный скульптор, художник, архитектор и поэт. Его творения, такие как статуя Давида и роспись Сикстинской капеллы, стали символами итальянского Ренессанса.</p>
+                        <p>Родился 6 марта 1475 года в Капрезе, Тоскана. С ранних лет проявил способности к искусству, и в 13 лет поступил в мастерскую Доменико Гирландайо. Вскоре его талант был замечен Лоренцо Медичи, который взял молодого художника под свое покровительство.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Полная статья Рафаэля -->
+            <div class="full-article" id="article-raphael">
+                <h2 class="article-heading">Рафаэль Санти</h2>
+                <div class="title__float_left">
+                    <img src="../фото/Рафаэль Санти.jpg" alt="Рафаэль Санти" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 28 марта 1483 г.</p>
+                        <p><strong>Дата смерти:</strong> 6 апреля 1520 г.</p>
+                        <p><strong>Страна:</strong> Италия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Музеи Ватикана</li>
+                            <li>Галерея Уффици</li>
+                            <li>Лувр</li>
+                            <li>Прадо</li>
+                            <li>Национальная галерея (Лондон)</li>
+                        </ul>
+                        <p>Рафаэль Санти - один из трех великих мастеров Высокого Возрождения, наряду с Леонардо да Винчи и Микеланджело. Его работы отличаются гармоничной композицией, изяществом линий и глубокой духовностью.</p>
+                        <p>Родился в Урбино в семье художника Джованни Санти. Рано проявив художественные способности, Рафаэль учился у своего отца, а затем у Пьетро Перуджино. Уже в 17 лет он был признан самостоятельным мастером.</p>
+                        <p>В 1508 году Рафаэль переехал в Рим, где получил заказ на роспись станц (парадных комнат) Ватиканского дворца. Его фрески, включая знаменитую "Афинскую школу", принесли ему славу одного из величайших художников своего времени.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель управления -->
+        <div class="artist-controls" id="artistControls">
+            <div class="current-artist-info" id="currentArtistInfo">
+                Выберите художника для просмотра подробной информации
+            </div>
+            <div>
+                <a href="#" class="view-source-btn" id="viewSourceBtn" style="display: none;">Смотреть в источнике</a>
+                <a href="#" class="back-to-cards-btn" id="backToCardsBtn" style="display: none;">← Вернуться к списку</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__text container">
+            <h3>Веб-программирование и дизайн на //vk.com/pechora_pro</h3>
+            <a href="https://vk.com/pechora_pro" target="_blank" style="color: white;">pechora_PRO</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const artistCards = document.getElementById('artistCards');
+            const fullArticlesContainer = document.getElementById('fullArticlesContainer');
+            const artistControls = document.getElementById('artistControls');
+            const viewSourceBtn = document.getElementById('viewSourceBtn');
+            const backToCardsBtn = document.getElementById('backToCardsBtn');
+            const currentArtistInfo = document.getElementById('currentArtistInfo');
+            
+            let currentArtist = null;
+            const articles = {
+                'davinci': document.getElementById('article-davinci'),
+                'michelangelo': document.getElementById('article-michelangelo'),
+                'raphael': document.getElementById('article-raphael')
+            };
+            
+            const artistNames = {
+                'davinci': 'Леонардо Да Винчи',
+                'michelangelo': 'Микеланджело Буонарроти',
+                'raphael': 'Рафаэль Санти'
+            };
+            
+            // Обработчик клика по карточке художника
+            document.querySelectorAll('.artist-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const artistId = this.getAttribute('data-artist');
+                    showArtistArticle(artistId);
+                });
+            });
+            
+            // Функция показа статьи художника
+            function showArtistArticle(artistId) {
+                currentArtist = artistId;
+                
+                // Скрываем все карточки
+                artistCards.classList.add('hide');
+                
+                // Скрываем все статьи
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                // Показываем нужную статью
+                if (articles[artistId]) {
+                    articles[artistId].classList.add('show');
+                }
+                
+                // Обновляем панель управления
+                currentArtistInfo.textContent = `Просмотр: ${artistNames[artistId]}`;
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'inline-block';
+                
+                // Прокрутка к статье
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: articles[artistId].offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            // Функция возврата к карточкам
+            function showArtistCards() {
+                // Скрываем все статьи
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                // Показываем карточки
+                artistCards.classList.remove('hide');
+                
+                // Обновляем панель управления
+                currentArtistInfo.textContent = 'Выберите художника для просмотра подробной информации';
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'none';
+                
+                // Прокрутка к карточкам
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: artistCards.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            // Обработчик кнопки "Вернуться к списку"
+            backToCardsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showArtistCards();
+            });
+            
+            // Обработчик кнопки "Смотреть в источнике" (если потребуется)
+            viewSourceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Здесь можно добавить логику для показа исходного источника
+            });
+            
+            // Изначально показываем карточки
+            showArtistCards();
+        });
+    </script>
+</body>
+
+</html>
