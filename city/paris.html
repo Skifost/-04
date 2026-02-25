@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Париж - Музеи мира</title>
+    <style>
+        html {
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 2px 0px 15px black;
+            width: 100%;
+            max-height: 100px;
+            height: 100%;
+            padding: 0px 20px;
+            z-index: 1000;
+        }
+
+        .header__intro {
+            background-image: url(../фото/header.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .header__title {
+            color: white;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, .5);
+            font-size: 15rem;
+        }
+
+        .header__nav {
+            margin: 0 100px;
+        }
+
+        span.nav__link:hover {
+            cursor: pointer;
+        }
+
+        .nav__link {
+            font-size: 2rem;
+        }
+
+        .nav__link:hover {
+            text-decoration: underline;
+        }
+
+        .nav__link,
+        .nav__list {
+            transition: all .2s;
+            padding: 15px 0px;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav__item:has(.nav__list) {
+            position: relative;
+        }
+
+        .nav__item .nav__list {
+            display: none;
+        }
+
+        .nav__item:hover>.nav__list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 30px;
+            padding: 20px;
+            left: 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 0px 15px rgb(180, 179, 179);
+        }
+
+        .title {
+            margin: 40px;
+        }
+
+        .title__heading {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title__paragraph {
+            font-size: 2rem;
+            text-align: justify;
+        }
+
+        .title__list li {
+            list-style: disc;
+            font-size: 2rem;
+        }
+
+        .title__list li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__paragraph:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__img {
+            border-radius: 20px;
+            width: 700px;
+            height: auto;
+        }
+
+        .title__float_left .title__img {
+            float: left;
+            margin: 0px 25px 10px 0px;
+        }
+
+        .title__float_right .title__img {
+            float: right;
+            margin: 0px 0px 10px 25px;
+        }
+
+        main section {
+            margin: 40px;
+        }
+
+        .article {
+            margin: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .article__info {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .article__info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .article__info ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-bottom: 5px;
+        }
+
+        .article__title {
+            font-size: 4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .article__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .article__date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .article__text {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .article__links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .article__link,
+        .article__link_text {
+            color: blue;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        .article__link:hover {
+            text-decoration: underline;
+        }
+
+        .article__link_text {
+            display: inline;
+        }
+
+        .article__float_left .article__img {
+            float: left;
+            margin-right: 20px;
+            border-radius: 20px;
+        }
+
+        .footer {
+            background-color: rgb(23 31 34);
+            padding: 30px;
+        }
+
+        .footer__text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .museum-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px;
+        }
+
+        .museum-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .museum-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .museum-card__image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .museum-card__title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .museum-card__description {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .museum-card__description p {
+            margin-bottom: 8px;
+        }
+
+        .museum-card__more {
+            font-size: 1.8rem;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+        }
+
+        .full-article {
+            margin: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+
+        .article-heading {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .article-content {
+            font-size: 2rem;
+            line-height: 1.7;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-content ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        .article-content li {
+            list-style: disc;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .museum-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px;
+            padding: 0 20px;
+        }
+
+        .view-source-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-source-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .back-to-cards-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-cards-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .current-museum-info {
+            font-size: 2rem;
+            color: #666;
+        }
+
+        .museum-cards.hide {
+            display: none;
+        }
+
+        .full-article {
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <div><img width="100" src="../фото/logo.png" alt="Логотип Музеи мира"></div>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="../Главная.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../великие музеи.html" class="nav__link">Великие музеи</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Статьи.html" class="nav__link">Статьи</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Живопись</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="../Живопись/Русская живопись.html" class="nav__link">Русская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Живопись/Испанская живопись.html" class="nav__link">Испанская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Живопись/Итальянская живопись.html" class="nav__link">Итальянская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Живопись/Голландская живопись.html" class="nav__link">Голландская живопись</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Скульптура.html" class="nav__link">Скульптура</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Города</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="../Барселона.html" class="nav__link">Барселона</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Лондон.html" class="nav__link">Лондон</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Москва.html" class="nav__link">Москва</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Париж.html" class="nav__link">Париж</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__intro">
+            <h1 class="header__title">Париж</h1>
+        </div>
+    </header>
+
+    <main class="main container">
+        <section class="title">
+            <h2 class="title__heading">Музеи Парижа</h2>
+            <p class="title__paragraph">Уважаемые гости сайта muzei-mira.com, сегодня мы открываем новый раздел, связанный с разделением по городам. На этой страничке будут располагаться музеи Парижа, так как именно в этом городе находится огромное количество замечательнейших исторических мест.</p>
+        </section>
+
+        <div class="museum-cards" id="museumCards">
+            <div class="museum-card" data-museum="louvre">
+                <img src="../фото/luvr.jpg" alt="Лувр" class="museum-card__image">
+                <h3 class="museum-card__title">Лувр</h3>
+                <div class="museum-card__description">
+                    <p><strong>Посещаемость:</strong> самый посещаемый музей мира</p>
+                    <p><strong>Бывший:</strong> королевский дворец</p>
+                    <p><strong>Знаменитые экспонаты:</strong> Мона Лиза, Венера Милосская</p>
+                </div>
+                <div class="museum-card__more">Подробнее...</div>
+            </div>
+
+            <div class="museum-card" data-museum="orsay">
+                <img src="../фото/dorse.jpg" alt="Музей д'Орсе" class="museum-card__image">
+                <h3 class="museum-card__title">Музей д'Орсе</h3>
+                <div class="museum-card__description">
+                    <p><strong>Расположение:</strong> бывший железнодорожный вокзал</p>
+                    <p><strong>Период:</strong> 1848-1914 годы</p>
+                    <p><strong>Направления:</strong> импрессионизм, постимпрессионизм</p>
+                </div>
+                <div class="museum-card__more">Подробнее...</div>
+            </div>
+
+            <div class="museum-card" data-museum="pompidou">
+                <img src="../фото/pompidy.jpeg" alt="Центр Помпиду" class="museum-card__image">
+                <h3 class="museum-card__title">Центр Помпиду</h3>
+                <div class="museum-card__description">
+                    <p><strong>Архитектура:</strong> футуристический дизайн</p>
+                    <p><strong>Назван в честь:</strong> президента Жоржа Помпиду</p>
+                    <p><strong>Коллекция:</strong> современное искусство</p>
+                </div>
+                <div class="museum-card__more">Подробнее...</div>
+            </div>
+        </div>
+
+        <div id="fullArticlesContainer">
+            <div class="full-article" id="article-louvre">
+                <h2 class="article-heading">Лувр</h2>
+                <div class="title__float_left">
+                    <img src="../фото/luvr.jpg" alt="Лувр" class="title__img">
+                    <div class="article-content">
+                        <p>Самый известный и посещаемый музей мира, расположенный в центре Парижа на правом берегу Сены. Бывший королевский дворец, превращенный в музей после Великой французской революции.</p>
+                        <p><strong>Адрес:</strong> Rue de Rivoli, 75001 Paris</p>
+                        <p><strong>Часы работы:</strong> 9:00 - 18:00 (пн, чт, сб, вс), 9:00 - 21:45 (ср, пт)</p>
+                        <p><strong>Известные экспонаты:</strong> Мона Лиза, Венера Милосская, Ника Самофракийская</p>
+                        <p>Лувр был основан в 1793 году как музей французской революции. Его коллекция формировалась на основе королевских собраний, конфискованных имуществ аристократии и церкви, а также военных трофеев Наполеона.</p>
+                        <p><strong>История здания:</strong></p>
+                        <ul>
+                            <li>XII век - построена крепость для защиты Парижа</li>
+                            <li>XIV век - преобразована в королевскую резиденцию</li>
+                            <li>XVI-XVII века - расширение и перестройка при Франциске I и Людовике XIV</li>
+                            <li>1793 год - открытие как публичного музея</li>
+                            <li>1989 год - строительство стеклянной пирамиды по проекту архитектора Бэй Юймина</li>
+                        </ul>
+                        <p><strong>Основные коллекции Лувра:</strong></p>
+                        <ul>
+                            <li><strong>Древний Восток</strong> - произведения Месопотамии, Персии, Леванта</li>
+                            <li><strong>Древний Египет</strong> - одна из крупнейших коллекций в мире</li>
+                            <li><strong>Древняя Греция, Этрурия и Рим</strong> - включает Венеру Милосскую и Нику Самофракийскую</li>
+                            <li><strong>Искусство ислама</strong> - произведения от Испании до Индии</li>
+                            <li><strong>Скульптура</strong> - от Средневековья до XIX века</li>
+                            <li><strong>Декоративное искусство</strong> - мебель, гобелены, ювелирные изделия</li>
+                            <li><strong>Живопись</strong> - европейская живопись от XIII до середины XIX века</li>
+                            <li><strong>Графическое искусство</strong> - рисунки, гравюры, миниатюры</li>
+                        </ul>
+                        <p><strong>Знаменитые произведения:</strong></p>
+                        <ul>
+                            <li>"Мона Лиза" Леонардо да Винчи</li>
+                            <li>"Венера Милосская" (ок. 130-100 гг. до н.э.)</li>
+                            <li>"Ника Самофракийская" (ок. 190 г. до н.э.)</li>
+                            <li>"Свобода, ведущая народ" Эжена Делакруа</li>
+                            <li>"Коронация Наполеона" Жака-Луи Давида</li>
+                            <li>Кодекс Хаммурапи (XVIII век до н.э.)</li>
+                        </ul>
+                        <p>Ежегодно Лувр посещают более 10 миллионов человек. Общая площадь музея составляет около 160 000 м², из которых 60 600 м² отведено под экспозиции.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-article" id="article-orsay">
+                <h2 class="article-heading">Музей д'Орсе</h2>
+                <div class="title__float_right">
+                    <img src="../фото/dorse.jpg" alt="Музей д'Орсе" class="title__img">
+                    <div class="article-content">
+                        <p>Музей расположен в здании бывшего железнодорожного вокзала и отеля д'Орсе на левом берегу Сены. Содержит коллекцию произведений искусства периода 1848-1914 годов.</p>
+                        <p><strong>Адрес:</strong> 1 Rue de la Légion d'Honneur, 75007 Paris</p>
+                        <p><strong>Часы работы:</strong> 9:30 - 18:00 (вт, ср, пт, сб, вс), 9:30 - 21:45 (чт)</p>
+                        <p><strong>Коллекция:</strong> Импрессионизм, постимпрессионизм, искусство модерна</p>
+                        <p>Музей д'Орсе был открыт в 1986 году в здании бывшего железнодорожного вокзала, построенного в 1900 году для Всемирной выставки. Вокзал функционировал до 1939 года, после чего здание использовалось для различных целей, пока в 1977 году не было принято решение о создании музея.</p>
+                        <p><strong>История здания:</strong></p>
+                        <ul>
+                            <li>1900 год - построен вокзал д'Орсе по проекту архитектора Виктора Лалу</li>
+                            <li>1939 год - закрытие вокзала из-за коротких платформ</li>
+                            <li>1970-е годы - угроза сноса здания</li>
+                            <li>1977 год - решение о создании музея</li>
+                            <li>1986 год - открытие музея д'Орсе</li>
+                        </ul>
+                        <p><strong>Основные коллекции музея:</strong></p>
+                        <ul>
+                            <li><strong>Живопись</strong> - французская живопись 1848-1914 годов</li>
+                            <li><strong>Скульптура</strong> - работы Родена, Карпо, Майоля и других</li>
+                            <li><strong>Декоративное искусство</strong> - мебель, стекло, керамика в стиле ар-нуво</li>
+                            <li><strong>Фотография</strong> - одна из первых музейных коллекций фотографии во Франции</li>
+                            <li><strong>Графика</strong> - рисунки, пастели, акварели</li>
+                            <li><strong>Архитектура</strong> - макеты, чертежи, фотографии архитектурных проектов</li>
+                        </ul>
+                        <p><strong>Знаменитые произведения:</strong></p>
+                        <ul>
+                            <li>"Завтрак на траве" Эдуарда Мане</li>
+                            <li>"Олимпия" Эдуарда Мане</li>
+                            <li>"Бал в Мулен де ла Галетт" Пьера Огюста Ренуара</li>
+                            <li>"Звездная ночь над Роной" Винсента Ван Гога</li>
+                            <li>"Танец в Буживале" Огюста Ренуара</li>
+                            <li>"Наводнение в Порт-Марли" Альфреда Сислея</li>
+                            <li>"Качели" Пьера Огюста Ренуара</li>
+                        </ul>
+                        <p><strong>Художественные направления в коллекции:</strong></p>
+                        <ul>
+                            <li>Реализм (Курбе, Милле)</li>
+                            <li>Импрессионизм (Моне, Ренуар, Дега, Писсарро, Сислей)</li>
+                            <li>Постимпрессионизм (Сезанн, Гоген, Ван Гог, Тулуз-Лотрек)</li>
+                            <li>Символизм (Моро, Редон)</li>
+                            <li>Наби (Боннар, Вюйар)</li>
+                            <li>Ар-нуво (Гимар, Гале, Лалик)</li>
+                        </ul>
+                        <p>Музей д'Орсе занимает площадь около 57 400 м², из которых 16 000 м² отведено под постоянную экспозицию. Ежегодно музей посещают более 3,5 миллионов человек.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-article" id="article-pompidou">
+                <h2 class="article-heading">Центр Помпиду</h2>
+                <div class="title__float_left">
+                    <img src="../фото/pompidy.jpeg" alt="Центр Помпиду" class="title__img">
+                    <div class="article-content">
+                        <p>Национальный центр искусства и культуры имени Жоржа Помпиду. Здание известно своим футуристическим дизайном с вынесенными на фасад коммуникациями.</p>
+                        <p><strong>Адрес:</strong> Place Georges-Pompidou, 75004 Paris</p>
+                        <p><strong>Часы работы:</strong> 11:00 - 21:00 (кроме вторника)</p>
+                        <p><strong>Коллекция:</strong> Современное искусство XX-XXI веков</p>
+                        <p>Центр Помпиду был открыт в 1977 году по инициативе президента Франции Жоржа Помпиду, который хотел создать в центре Парижа культурное учреждение, посвященное современному искусству. Здание было спроектировано архитекторами Ренцо Пиано и Ричардом Роджерсом.</p>
+                        <p><strong>Архитектурные особенности:</strong></p>
+                        <ul>
+                            <li>Все технические системы (водопровод, вентиляция, электричество) вынесены на фасад и окрашены в разные цвета</li>
+                            <li>Синий цвет - кондиционирование воздуха</li>
+                            <li>Зеленый цвет - водопровод</li>
+                            <li>Желтый цвет - электрические провода</li>
+                            <li>Красный цвет - лифты и эскалаторы</li>
+                            <li>Прозрачные эскалаторы в пластиковых трубах</li>
+                        </ul>
+                        <p><strong>Структура Центра Помпиду:</strong></p>
+                        <ul>
+                            <li><strong>Национальный музей современного искусства</strong> - крупнейшая в Европе коллекция современного искусства (более 100 000 произведений)</li>
+                            <li><strong>Публичная информационная библиотека</strong> - более 400 000 книг, 2 400 журналов, мультимедийные ресурсы</li>
+                            <li><strong>Институт исследования и координации акустики и музыки (IRCAM)</strong> - центр музыкальных исследований</li>
+                            <li><strong>Кинозалы и конференц-залы</strong> - для проведения мероприятий и показов</li>
+                            <li><strong>Выставочные площадки</strong> - для временных выставок</li>
+                        </ul>
+                        <p><strong>Коллекция Национального музея современного искусства:</strong></p>
+                        <ul>
+                            <li><strong>Искусство начала XX века</strong> - фовизм, кубизм, сюрреализм (Матисс, Пикассо, Кандинский, Дали)</li>
+                            <li><strong>Послевоенное искусство</strong> - абстрактный экспрессионизм, поп-арт, новый реализм (Поллок, Уорхол, Кляйн)</li>
+                            <li><strong>Современное искусство</strong> - концептуальное искусство, инсталляции, видеоарт, цифровое искусство</li>
+                            <li><strong>Дизайн и архитектура</strong> - промышленный дизайн, мебель, архитектурные проекты</li>
+                        </ul>
+                        <p><strong>Знаменитые произведения:</strong></p>
+                        <ul>
+                            <li>"Танец" Анри Матисса</li>
+                            <li>"Герника" Пабло Пикассо (эскизы и подготовительные работы)</li>
+                            <li>"Фонтан" Марселя Дюшана (реплика)</li>
+                            <li>"Синий монохром" Ива Кляйна</li>
+                            <li>"Банки супа Кэмпбелл" Энди Уорхола</li>
+                            <li>"Обнаженная, спускающаяся по лестнице" Марселя Дюшана</li>
+                        </ul>
+                        <p>Центр Помпиду занимает площадь около 100 000 м² и ежегодно принимает более 3 миллионов посетителей. Перед зданием расположена площадь с уличными артистами, художниками и музыкантами, создающая уникальную атмосферу современного Парижа.</p>
+                        <p>В 1997 году был открыт филиал Центра Помпиду в Меце (Франция), а в 2015 году - в Малаге (Испания). Планируется открытие филиалов в Шанхае (Китай) и Брюсселе (Бельгия).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="museum-controls" id="museumControls">
+            <div class="current-museum-info" id="currentMuseumInfo">
+                Выберите музей для просмотра подробной информации
+            </div>
+            <div>
+                <a href="#" class="view-source-btn" id="viewSourceBtn" style="display: none;">Смотреть в источнике</a>
+                <a href="#" class="back-to-cards-btn" id="backToCardsBtn" style="display: none;">← Вернуться к списку</a>
+            </div>
+        </div>
+
+        <section class="title">
+            <h2 class="title__heading">Другие знаменитые музеи Парижа</h2>
+            <ul class="title__list">
+                <li><strong>Музей Родена</strong> - коллекция работ Огюста Родена в особняке Бирона</li>
+                <li><strong>Музей Пикассо</strong> - крупнейшая коллекция произведений Пабло Пикассо</li>
+                <li><strong>Музей Оранжери</strong> - известен серией картин "Кувшинки" Клода Моне</li>
+                <li><strong>Музей Карнавале</strong> - музей истории Парижа</li>
+                <li><strong>Музей армии</strong> - расположен в Доме инвалидов</li>
+                <li><strong>Музей на набережной Бранли</strong> - искусство Африки, Азии, Океании и Америки</li>
+                <li><strong>Музей Средневековья</strong> - коллекция средневекового искусства в термах Клюни</li>
+            </ul>
+        </section>
+
+        <section class="title">
+            <p class="title__paragraph">Источник: <a href="https://muzei-mira.com/muzei_francii/paris/" class="article__link_text" target="_blank">https://muzei-mira.com/muzei_francii/paris/</a></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__text container">
+            <h3>Веб-программирование и дизайн на //vk.com/pechora_pro</h3>
+            <a href="https://vk.com/pechora_pro" target="_blank" style="color: white;">pechora_PRO</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const museumCards = document.getElementById('museumCards');
+            const fullArticlesContainer = document.getElementById('fullArticlesContainer');
+            const museumControls = document.getElementById('museumControls');
+            const viewSourceBtn = document.getElementById('viewSourceBtn');
+            const backToCardsBtn = document.getElementById('backToCardsBtn');
+            const currentMuseumInfo = document.getElementById('currentMuseumInfo');
+            
+            let currentMuseum = null;
+            const articles = {
+                'louvre': document.getElementById('article-louvre'),
+                'orsay': document.getElementById('article-orsay'),
+                'pompidou': document.getElementById('article-pompidou')
+            };
+            
+            const museumNames = {
+                'louvre': 'Лувр',
+                'orsay': 'Музей д\'Орсе',
+                'pompidou': 'Центр Помпиду'
+            };
+            
+            document.querySelectorAll('.museum-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const museumId = this.getAttribute('data-museum');
+                    showMuseumArticle(museumId);
+                });
+            });
+            
+            function showMuseumArticle(museumId) {
+                currentMuseum = museumId;
+                
+                museumCards.classList.add('hide');
+                
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                if (articles[museumId]) {
+                    articles[museumId].classList.add('show');
+                }
+                
+                currentMuseumInfo.textContent = `Просмотр: ${museumNames[museumId]}`;
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'inline-block';
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: articles[museumId].offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            function showMuseumCards() {
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                museumCards.classList.remove('hide');
+                
+                currentMuseumInfo.textContent = 'Выберите музей для просмотра подробной информации';
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'none';
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: museumCards.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            backToCardsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showMuseumCards();
+            });
+            
+            viewSourceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+            
+            showMuseumCards();
+        });
+    </script>
+</body>
+
+</html>
