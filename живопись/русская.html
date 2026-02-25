@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русская живопись - Музеи мира</title>
+    <style>
+        /* Ваш CSS код */
+        /* *Common */
+        html {
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+
+        /* *Header */
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 2px 0px 15px black;
+            width: 100%;
+            max-height: 100px;
+            height: 100%;
+            padding: 0px 20px;
+            z-index: 1000;
+        }
+
+        .header__intro {
+            background-image: url(../фото/header.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .header__title {
+            color: white;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, .5);
+            font-size: 15rem;
+        }
+
+
+        /* *Nav */
+        .header__nav {
+            margin: 0 100px;
+        }
+
+        span.nav__link:hover {
+            cursor: pointer;
+        }
+
+        .nav__link {
+            font-size: 2rem;
+        }
+
+        .nav__link:hover {
+            text-decoration: underline;
+        }
+
+        .nav__link,
+        .nav__list {
+            transition: all .2s;
+            padding: 15px 0px;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 25px;
+        }
+
+        /* Inner List */
+        .nav__item:has(.nav__list) {
+            position: relative;
+        }
+
+        .nav__item .nav__list {
+            display: none;
+        }
+
+        .nav__item:hover>.nav__list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 30px;
+            padding: 20px;
+            left: 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 0px 15px rgb(180, 179, 179);
+        }
+
+
+        /* *Title */
+        .title {
+            margin: 40px;
+        }
+
+        .title__heading {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title__paragraph {
+            font-size: 2rem;
+            text-align: justify;
+        }
+
+        .title__list li {
+            list-style: disc;
+            font-size: 2rem;
+        }
+
+        .title__list li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__paragraph:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__img {
+            border-radius: 20px;
+            width: 700px;
+            height: auto;
+        }
+
+        .title__float_left .title__img {
+            float: left;
+            margin: 0px 25px 10px 0px;
+        }
+
+        .title__float_right .title__img {
+            float: right;
+            margin: 0px 0px 10px 25px;
+        }
+
+
+        /* *Main */
+        main section {
+            margin: 40px;
+        }
+
+
+        /* *Article */
+        .article {
+            margin: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .article__info {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .article__info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .article__info ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-bottom: 5px;
+        }
+
+        .article__title {
+            font-size: 4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .article__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .article__date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .article__text {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .article__links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .article__link,
+        .article__link_text {
+            color: blue;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        .article__link:hover {
+            text-decoration: underline;
+        }
+
+        .article__link_text {
+            display: inline;
+        }
+
+        .article__float_left .article__img {
+            float: left;
+            margin-right: 20px;
+            border-radius: 20px;
+        }
+
+        /* *Footer */
+        .footer {
+            background-color: rgb(23 31 34);
+            padding: 30px;
+        }
+
+        .footer__text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* Стили для карточек художников */
+        .artist-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px;
+        }
+
+        .artist-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .artist-card__image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .artist-card__title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .artist-card__details {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .artist-card__details p {
+            margin-bottom: 8px;
+        }
+
+        .artist-card__museums {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .artist-card__museums li {
+            list-style: disc;
+            margin-bottom: 6px;
+            font-size: 1.8rem;
+        }
+
+        .artist-card__more {
+            font-size: 1.8rem;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+        }
+
+        /* Стили для полных статей */
+        .full-article {
+            margin: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+
+        .article-heading {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .article-content {
+            font-size: 2rem;
+            line-height: 1.7;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-content ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        .article-content li {
+            list-style: disc;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        /* Кнопки управления */
+        .artist-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px;
+            padding: 0 20px;
+        }
+
+        .view-source-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-source-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .back-to-cards-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-cards-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .current-artist-info {
+            font-size: 2rem;
+            color: #666;
+        }
+
+        /* Скрытие элементов */
+        .artist-cards.hide {
+            display: none;
+        }
+
+        .full-article {
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <div><img width="100" src="../фото/logo.png" alt="Логотип Музеи мира"></div>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="../Главная.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../великие музеи.html" class="nav__link">Великие музеи</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Статьи.html" class="nav__link">Статьи</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Живопись</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="Русская живопись.html" class="nav__link">Русская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="Испанская живопись.html" class="nav__link">Испанская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="Итальянская живопись.html" class="nav__link">Итальянская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="Голландская живопись.html" class="nav__link">Голландская живопись</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav__item">
+                        <a href="Скульптура.html" class="nav__link">Скульптура</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Города</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="../Города/Барселона.html" class="nav__link">Барселона</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Лондон.html" class="nav__link">Лондон</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Москва.html" class="nav__link">Москва</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Париж.html" class="nav__link">Париж</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__intro">
+            <h1 class="header__title">Русская живопись</h1>
+        </div>
+    </header>
+
+    <main class="main container">
+        <section class="title">
+            <h2 class="title__heading">Великие русские художники</h2>
+            <p class="title__paragraph">Русская живопись славится своими глубокими традициями, духовностью и уникальным взглядом на мир. От былинных сюжетов Васнецова до морских пейзажей Айвазовского - русские художники создали неповторимый художественный язык, узнаваемый во всем мире.</p>
+        </section>
+
+        <!-- Карточки художников -->
+        <div class="artist-cards" id="artistCards">
+            <!-- Карточка Васнецова -->
+            <div class="artist-card" data-artist="vasnetsov">
+                <img src="../фото/Васнецов.jpg" alt="Васнецов Виктор Михайлович" class="artist-card__image">
+                <h3 class="artist-card__title">Васнецов Виктор Михайлович</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 15 мая 1848</p>
+                    <p><strong>Дата смерти:</strong> 23 июня 1926</p>
+                    <p><strong>Страна:</strong> Россия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Русский музей</li>
+                        <li>Третьяковская галерея</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+
+            <!-- Карточка Айвазовского -->
+            <div class="artist-card" data-artist="aivazovsky">
+                <img src="../фото/Иван Айвазовский.jpg" alt="Айвазовский Иван Константинович" class="artist-card__image">
+                <h3 class="artist-card__title">Айвазовский Иван Константинович</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 29 июля 1817</p>
+                    <p><strong>Дата смерти:</strong> 5 мая 1900 г</p>
+                    <p><strong>Страна:</strong> Россия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Русский музей</li>
+                        <li>Эрмитаж</li>
+                        <li>Третьяковская галерея</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+
+            <!-- Карточка Репина -->
+            <div class="artist-card" data-artist="repin">
+                <img src="../фото/Репин Илья.jpg" alt="Репин Илья Ефимович" class="artist-card__image">
+                <h3 class="artist-card__title">Репин Илья Ефимович</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 5 августа 1844</p>
+                    <p><strong>Дата смерти:</strong> 29 сентября 1930</p>
+                    <p><strong>Страна:</strong> Россия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Русский музей</li>
+                        <li>Третьяковская галерея</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+        </div>
+
+        <!-- Контейнер для полных статей -->
+        <div id="fullArticlesContainer">
+            <!-- Полная статья Васнецова -->
+            <div class="full-article" id="article-vasnetsov">
+                <h2 class="article-heading">Васнецов Виктор Михайлович</h2>
+                <div class="title__float_left">
+                    <img src="../фото/Васнецов.jpg" alt="Васнецов Виктор Михайлович" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 15 мая 1848</p>
+                        <p><strong>Дата смерти:</strong> 23 июня 1926</p>
+                        <p><strong>Страна:</strong> Россия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Русский музей</li>
+                            <li>Третьяковская галерея</li>
+                        </ul>
+                        <p>Виктор Михайлович Васнецов родился в 1848 году 15 мая в селе со смешным названием Лопьял. Отец Васнецова был священником, также как и его дед и прадед. В 1850 году Михаил Васильевич увез семью в село Рябово. Это было связано с его службой. У Виктора Васнецова было 5 братьев, один из которых также стал знаменитым художников, звали его Аполлинарий.</p>
+                        <p>Талант Васнецова проявился с детства, но крайне неудачное денежное положение в семье не оставило вариантов, как отдать Виктора в Вятское духовное училище в 1858 году. Уже в 14-летнем возрасте Виктор Васнецов учился в Вятской духовной семинарии. Детей священников туда брали бесплатно.</p>
+                        <p>Так и не окончив семинарию, в 1867 году Васнецов отправился в Петербург поступать в Академию художеств. Денег у него было совсем мало, и Виктор выставил на «аукцион» 2 свои картины – «Молочница» и «Жница». До отъезда он так и не получил за них денег. 60 рублей за эти две картины он получил спустя несколько месяцев уже в Петербурге. Прибыв в столицу, у молодого художника было всего 10 рублей.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Полная статья Айвазовского -->
+            <div class="full-article" id="article-aivazovsky">
+                <h2 class="article-heading">Айвазовский Иван Константинович</h2>
+                <div class="title__float_right">
+                    <img src="../фото/Иван Айвазовский.jpg" alt="Айвазовский Иван Константинович" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 29 июля 1817</p>
+                        <p><strong>Дата смерти:</strong> 5 мая 1900 г</p>
+                        <p><strong>Страна:</strong> Россия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Русский музей</li>
+                            <li>Эрмитаж</li>
+                            <li>Третьяковская галерея</li>
+                        </ul>
+                        <p>Такое имя при крещении получил будущий великий русский художник Айвазовский Иван Константинович. Мальчик любил рисовать с детства, но семья была бедной, и не видать бы России великого художника, если бы не градоначальник Феодосии А.И. Казначеев. Именно с его помощью Айвазовский был принят сначала в гимназию в Симферополе, а затем - в петербургскую художественную Академию. В Петербурге Айвазовский быстро стал "своим": общается с Брюлловым, Глинкой, Крыловым.</p>
+                        <p>Судьбой Айвазовского стало море. Первые морские этюды художник написал еще в Академии, некоторые из них были премированы. Но биография русского художника, возможно, была бы совсем другой, если бы в 1838 году Иван Константинович Айвазовский не отправился бы на два года в Крым. В это время Айвазовский знакомится с будущими морскими героями России - Нахимовым, Лазаревым, Корниловым. Знакомство накладывает отпечаток на творчество: теперь это не просто морские этюды, а картины-баталии.</p>
+                        <p>В 1840 году Айвазовский уезжает за границу, где настолько плодотворно трудится, так ярко раскрывает свой талант, что награждается золотой медалью французской художественной академии и становится кавалером Ордена Почетного легиона.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Полная статья Репина -->
+            <div class="full-article" id="article-repin">
+                <h2 class="article-heading">Репин Илья Ефимович</h2>
+                <div class="title__float_left">
+                    <img src="../фото/Репин Илья.jpg" alt="Репин Илья Ефимович" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 5 августа 1844</p>
+                        <p><strong>Дата смерти:</strong> 29 сентября 1930</p>
+                        <p><strong>Страна:</strong> Россия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Русский музей</li>
+                            <li>Третьяковская галерея</li>
+                        </ul>
+                        <p>И. Е. Репин родился в г. Чугуеве, расположенном на территории Харьковской губернии, в 1844 году. И никому тогда в голову не могло даже прийти, что этот обычный мальчишка из бедной семьи станет великим русским художником. Мать первая заметила его способности в то время, когда он помогал ей, готовясь к Пасхе, расписывать яйца. Как ни радовалась мать такому таланту, на его развитие денег у нее не было.</p>
+                        <p>Илья стал посещать уроки местной школы, где учились топографии, после закрытия которой поступил к иконописцу Н. Бунакову, в его мастерскую. Получив в мастерской необходимые навыки в рисовании, пятнадцатилетний Репин стал частым участником росписи многочисленных церквей в селах. Так продолжалось четыре года, после чего с накопленными ста рублями будущий художник отправился в Петербург, где собрался поступить в Академию художеств.</p>
+                        <p>Провалив вступительные экзамены, он стал слушателем подготовительной художественной школы при Обществе поощрения художеств. Среди первых его преподавателей в школе был И. Н. Крамской, который еще долго был верным наставником Репина. На следующий год Илью Ефимовича приняли в Академию, где он стал писать работы академические, а заодно и несколько произведений написал по собственному желанию.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель управления -->
+        <div class="artist-controls" id="artistControls">
+            <div class="current-artist-info" id="currentArtistInfo">
+                Выберите художника для просмотра подробной информации
+            </div>
+            <div>
+                <a href="#" class="view-source-btn" id="viewSourceBtn" style="display: none;">Смотреть в источнике</a>
+                <a href="#" class="back-to-cards-btn" id="backToCardsBtn" style="display: none;">← Вернуться к списку</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__text container">
+            <h3>Веб-программирование и дизайн на //vk.com/pechora_pro</h3>
+            <a href="https://vk.com/pechora_pro" target="_blank" style="color: white;">pechora_PRO</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const artistCards = document.getElementById('artistCards');
+            const fullArticlesContainer = document.getElementById('fullArticlesContainer');
+            const artistControls = document.getElementById('artistControls');
+            const viewSourceBtn = document.getElementById('viewSourceBtn');
+            const backToCardsBtn = document.getElementById('backToCardsBtn');
+            const currentArtistInfo = document.getElementById('currentArtistInfo');
+            
+            let currentArtist = null;
+            const articles = {
+                'vasnetsov': document.getElementById('article-vasnetsov'),
+                'aivazovsky': document.getElementById('article-aivazovsky'),
+                'repin': document.getElementById('article-repin')
+            };
+            
+            const artistNames = {
+                'vasnetsov': 'Васнецов Виктор Михайлович',
+                'aivazovsky': 'Айвазовский Иван Константинович',
+                'repin': 'Репин Илья Ефимович'
+            };
+            
+            // Обработчик клика по карточке художника
+            document.querySelectorAll('.artist-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const artistId = this.getAttribute('data-artist');
+                    showArtistArticle(artistId);
+                });
+            });
+            
+            // Функция показа статьи художника
+            function showArtistArticle(artistId) {
+                currentArtist = artistId;
+                
+                // Скрываем все карточки
+                artistCards.classList.add('hide');
+                
+                // Скрываем все статьи
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                // Показываем нужную статью
+                if (articles[artistId]) {
+                    articles[artistId].classList.add('show');
+                }
+                
+                // Обновляем панель управления
+                currentArtistInfo.textContent = `Просмотр: ${artistNames[artistId]}`;
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'inline-block';
+                
+                // Прокрутка к статье
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: articles[artistId].offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            // Функция возврата к карточкам
+            function showArtistCards() {
+                // Скрываем все статьи
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                // Показываем карточки
+                artistCards.classList.remove('hide');
+                
+                // Обновляем панель управления
+                currentArtistInfo.textContent = 'Выберите художника для просмотра подробной информации';
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'none';
+                
+                // Прокрутка к карточкам
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: artistCards.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            // Обработчик кнопки "Вернуться к списку"
+            backToCardsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showArtistCards();
+            });
+            
+            // Обработчик кнопки "Смотреть в источнике" (если потребуется)
+            viewSourceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Здесь можно добавить логику для показа исходного источника
+            });
+            
+            // Изначально показываем карточки
+            showArtistCards();
+        });
+    </script>
+</body>
+
+</html>
