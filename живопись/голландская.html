@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Голландская живопись - Музеи мира</title>
+    <style>
+        html {
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 2px 0px 15px black;
+            width: 100%;
+            max-height: 100px;
+            height: 100%;
+            padding: 0px 20px;
+            z-index: 1000;
+        }
+
+        .header__intro {
+            background-image: url(../фото/header.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .header__title {
+            color: white;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, .5);
+            font-size: 15rem;
+        }
+
+        .header__nav {
+            margin: 0 100px;
+        }
+
+        span.nav__link:hover {
+            cursor: pointer;
+        }
+
+        .nav__link {
+            font-size: 2rem;
+        }
+
+        .nav__link:hover {
+            text-decoration: underline;
+        }
+
+        .nav__link,
+        .nav__list {
+            transition: all .2s;
+            padding: 15px 0px;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav__item:has(.nav__list) {
+            position: relative;
+        }
+
+        .nav__item .nav__list {
+            display: none;
+        }
+
+        .nav__item:hover>.nav__list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 30px;
+            padding: 20px;
+            left: 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 0px 15px rgb(180, 179, 179);
+        }
+
+        .title {
+            margin: 40px;
+        }
+
+        .title__heading {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title__paragraph {
+            font-size: 2rem;
+            text-align: justify;
+        }
+
+        .title__list li {
+            list-style: disc;
+            font-size: 2rem;
+        }
+
+        .title__list li:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__paragraph:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .title__img {
+            border-radius: 20px;
+            width: 700px;
+            height: auto;
+        }
+
+        .title__float_left .title__img {
+            float: left;
+            margin: 0px 25px 10px 0px;
+        }
+
+        .title__float_right .title__img {
+            float: right;
+            margin: 0px 0px 10px 25px;
+        }
+
+        main section {
+            margin: 40px;
+        }
+
+        .article {
+            margin: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .article__info {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .article__info p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .article__info ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-bottom: 5px;
+        }
+
+        .article__title {
+            font-size: 4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .article__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .article__date {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .article__text {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .article__links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .article__link,
+        .article__link_text {
+            color: blue;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        .article__link:hover {
+            text-decoration: underline;
+        }
+
+        .article__link_text {
+            display: inline;
+        }
+
+        .article__float_left .article__img {
+            float: left;
+            margin-right: 20px;
+            border-radius: 20px;
+        }
+
+        .footer {
+            background-color: rgb(23 31 34);
+            padding: 30px;
+        }
+
+        .footer__text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .artist-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px;
+        }
+
+        .artist-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .artist-card__image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .artist-card__title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .artist-card__details {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .artist-card__details p {
+            margin-bottom: 8px;
+        }
+
+        .artist-card__museums {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .artist-card__museums li {
+            list-style: disc;
+            margin-bottom: 6px;
+            font-size: 1.8rem;
+        }
+
+        .artist-card__more {
+            font-size: 1.8rem;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+        }
+
+        .full-article {
+            margin: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+
+        .article-heading {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .article-content {
+            font-size: 2rem;
+            line-height: 1.7;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-content ul {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        .article-content li {
+            list-style: disc;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .artist-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px;
+            padding: 0 20px;
+        }
+
+        .view-source-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-source-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .back-to-cards-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-cards-btn:hover {
+            background-color: #e9e9e9;
+            text-decoration: underline;
+        }
+
+        .current-artist-info {
+            font-size: 2rem;
+            color: #666;
+        }
+
+        .artist-cards.hide {
+            display: none;
+        }
+
+        .full-article {
+            display: none;
+        }
+
+        .full-article.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <div><img width="100" src="..\фото\logo.png" alt="Логотип Музеи мира"></div>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="../Главная.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../великие музеи.html" class="nav__link">Великие музеи</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Статьи.html" class="nav__link">Статьи</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Живопись</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="./Русская живопись.html" class="nav__link">Русская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="./Испанская живопись.html" class="nav__link">Испанская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="./Итальянская живопись.html" class="nav__link">Итальянская живопись</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="./голландская живопись.html" class="nav__link">Голландская живопись</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav__item">
+                        <a href="../Скульптура.html" class="nav__link">Скульптура</a>
+                    </li>
+                    <li class="nav__item">
+                        <span class="nav__link">Города</span>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="../Города/Барселона.html" class="nav__link">Барселона</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Лондон.html" class="nav__link">Лондон</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Москва.html" class="nav__link">Москва</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="../Города/Париж.html" class="nav__link">Париж</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header__intro">
+            <h1 class="header__title">Голландская живопись</h1>
+        </div>
+    </header>
+
+    <main class="main container">
+        <section class="title">
+            <h2 class="title__heading">Великие голландские художники</h2>
+            <p class="title__paragraph">Голландская живопись славится своими мастерами, которые внесли неоценимый вклад в мировое искусство. От загадочных работ Босха до эмоциональных полотен Ван Гога - голландские художники всегда удивляли и восхищали ценителей искусства.</p>
+        </section>
+
+        <div class="artist-cards" id="artistCards">
+            <div class="artist-card" data-artist="vangogh">
+                <img src="../фото/ван гог.jpg" alt="Винсент Ван Гог" class="artist-card__image">
+                <h3 class="artist-card__title">Винсент Ван Гог</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 30 марта 1853 года</p>
+                    <p><strong>Дата смерти:</strong> 29 июля 1890</p>
+                    <p><strong>Страна:</strong> Голландия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Метрополитен музей</li>
+                        <li>ГМИИ им. Пушкина</li>
+                        <li>Эрмитаж</li>
+                        <li>Музей д'Орсе</li>
+                        <li>Музей современного искусства (Нью-Йорк)</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+
+            <div class="artist-card" data-artist="bosch">
+                <img src="../фото/иероним босх.jpg" alt="Иероним Босх" class="artist-card__image">
+                <h3 class="artist-card__title">Иероним Босх</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 1450</p>
+                    <p><strong>Дата смерти:</strong> 9 августа 1516</p>
+                    <p><strong>Страна:</strong> Голландия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Музей Прадо</li>
+                        <li>Лувр</li>
+                        <li>Музей Бойманса-ван Бёнингена</li>
+                        <li>Национальная галерея искусств (Вашингтон)</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+
+            <div class="artist-card" data-artist="vermeer">
+                <img src="../фото/ян вермер.jpg" alt="Ян Вермеер" class="artist-card__image">
+                <h3 class="artist-card__title">Ян Вермеер</h3>
+                <div class="artist-card__details">
+                    <p><strong>Год рождения:</strong> 31 октября 1632</p>
+                    <p><strong>Дата смерти:</strong> 15 декабря 1675</p>
+                    <p><strong>Страна:</strong> Голландия</p>
+                    <p><strong>Работы художника находятся:</strong></p>
+                    <ul class="artist-card__museums">
+                        <li>Берлинская картинная галерея</li>
+                        <li>Дрезденская галерея</li>
+                        <li>Лувр</li>
+                        <li>Метрополитен музей</li>
+                        <li>Маурицхёйс</li>
+                    </ul>
+                </div>
+                <div class="artist-card__more">Подробнее...</div>
+            </div>
+        </div>
+
+        <div id="fullArticlesContainer">
+            <div class="full-article" id="article-vangogh">
+                <h2 class="article-heading">Винсент Ван Гог</h2>
+                <div class="title__float_left">
+                    <img src="../фото/ван гог.jpg" alt="Винсент Ван Гог" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 30 марта 1853 года</p>
+                        <p><strong>Дата смерти:</strong> 29 июля 1890</p>
+                        <p><strong>Страна:</strong> Голландия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Метрополитен музей</li>
+                            <li>ГМИИ им. Пушкина</li>
+                            <li>Эрмитаж</li>
+                            <li>Музей д'Орсе</li>
+                            <li>Музей современного искусства (Нью-Йорк)</li>
+                        </ul>
+                        <p>Винсент Ван Гог родился в голландском городе Гроот-Зундерте 30 марта 1853 года. Ван гог был первым ребенком в семье (не считая родившегося мертвым брата). Отца звали Теодор Ван Гог, мать - Карнелией. Семья была у них большая: 2 сына и три дочери. В роду Ван Гога все мужчины, так или иначе имели дело с картинами, либо служили церкви.</p>
+                        <p>Уже к 1869 году, даже не закончив школу, он стал работать в фирме, которая продавала картины. По правде говоря, у Ван Гога не получалось хорошо продавать картины, но зато он обладал безграничной любовью к живописи, а также ему хорошо давались языки. В 1873 году, в 20-летнем возрасте, он попал в Лондон, где провел 2 года, которые изменили всю его жизнь.</p>
+                        <p>В Лондоне Ван Гог жил припеваючи. У него было весьма хорошее жалование, которого хватало на посещение различных картинных галерей и музеев. Он даже купил себе цилиндр, без которого просто нельзя было обойтись в Лондоне. Все шло к тому, что Ван Гог мог бы стать преуспевающим торговцем, но ...как это часто бывает, на пути его карьеры стала любовь, да, именно любовь.</p>
+                        <p>В 1886 году в начале марта Ван Гог переезжает в Париж к своему брату Тео, и живет у него на квартире. Там он берет уроки живописи у Фернана Кормона, и знакомится с такими личностями как Писсаро, Гоген и многими другими художниками. Очень быстро он забывает весь мрак голландской жизни, и быстро завоевывает уважение как художник. Рисует четко, ярко в стиле импрессионизма и постимпрессионизма.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-article" id="article-bosch">
+                <h2 class="article-heading">Иероним Босх</h2>
+                <div class="title__float_right">
+                    <img src="../фото/иероним босх.jpg" alt="Иероним Босх" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 1450</p>
+                        <p><strong>Дата смерти:</strong> 9 августа 1516</p>
+                        <p><strong>Страна:</strong> Голландия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Музей Прадо</li>
+                            <li>Лувр</li>
+                            <li>Музей Бойманса-ван Бёнингена</li>
+                            <li>Национальная галерея искусств (Вашингтон)</li>
+                        </ul>
+                        <p>Иеронима Босха называют «отцом сюрреализма», и его картины до сих пор поражают ценителей искусства своими причудливыми образами.</p>
+                        <p>Босх – это прозвище, а звали по-настоящему художника Йероен ван Акен. Родился в 1450 году в семействе художников в городе Хертогенбосе. Хоть и отец Босха, и его дед были хорошими художниками, все же первым его учителем был Д. Боутс – голландский художник, который заезжал в город Хертогенбос, и даже иногда жил продолжительное время.</p>
+                        <p>Творчество Босха началось с росписей деталей различных алтарей, капелл. Одной из первых выдающихся работ Иеронима Босха была роспись створок алтаря в соборе Святого Иоанна. Надо заметить, что это работа очень понравилась Филиппу Красивому, который впоследствии стал королем Кастилии.</p>
+                        <p>Картины Иеронима Босха до сих пор остаются загадкой для искусствоведов. На его счет записано около 40 картин. Возможно, их было и больше, но художник никогда не подписывал свои работы. Картины Босха висели во многих королевских дворах, и вызывали восхищение его современников.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-article" id="article-vermeer">
+                <h2 class="article-heading">Ян Вермеер</h2>
+                <div class="title__float_left">
+                    <img src="../фото/ян вермер.jpg" alt="Ян Вермеер" class="title__img">
+                    <div class="article-content">
+                        <p><strong>Год рождения:</strong> 31 октября 1632</p>
+                        <p><strong>Дата смерти:</strong> 15 декабря 1675</p>
+                        <p><strong>Страна:</strong> Голландия</p>
+                        <p><strong>Работы художника находятся:</strong></p>
+                        <ul>
+                            <li>Берлинская картинная галерея</li>
+                            <li>Дрезденская галерея</li>
+                            <li>Лувр</li>
+                            <li>Метрополитен музей</li>
+                            <li>Маурицхёйс</li>
+                        </ul>
+                        <p>Нидерландский художник, творивший в 17-м веке, почти забытый в 18-м, и заново вспыхнувший своим гением в конце 19-го века – это Ян Вермеер (или Ян Делфтский). Когда биографы начнут собирать документы и материалы о нем, то он вполне заслужено получит прозвище «Делфтский скиф», так как, подобно мифологическому сфинксу, его история жизни хранит молчание о своем прошлом.</p>
+                        <p>В его исследуемой биографии много белых пятен, мало достоверной, подтвержденной документами информации. Даже больше известно о его родственниках, родителях и теще, чем о некоторых фактах жизни художника.</p>
+                        <p>Известно, что родился Ян в октябре 1632 года в городе Делфт, что в районе Южной Голландии, в семье успешного торговца, ремесленника (отец Яна занимался ткачеством), а впоследствии содержателя постоялого двора. Известный факт также, что он был вторым ребенком и единственным сыном у своих родителей.</p>
+                        <p>1653 год отмечен такими вехами в жизни Яна Вермеера как женитьба и вступление в местную гильдию Святого Луки, где он зарегистрирован мастером живописи. В апреле 1653 года он женился на девушке из окрестной деревни, они прожили всю жизнь, и у них было 11 детей.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="artist-controls" id="artistControls">
+            <div class="current-artist-info" id="currentArtistInfo">
+                Выберите художника для просмотра подробной информации
+            </div>
+            <div>
+                <a href="#" class="view-source-btn" id="viewSourceBtn" style="display: none;">Смотреть в источнике</a>
+                <a href="#" class="back-to-cards-btn" id="backToCardsBtn" style="display: none;">← Вернуться к списку</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__text container">
+            <h3>Веб-программирование и дизайн на //vk.com/pechora_pro</h3>
+            <a href="https://vk.com/pechora_pro" target="_blank" style="color: white;">pechora_PRO</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const artistCards = document.getElementById('artistCards');
+            const fullArticlesContainer = document.getElementById('fullArticlesContainer');
+            const artistControls = document.getElementById('artistControls');
+            const viewSourceBtn = document.getElementById('viewSourceBtn');
+            const backToCardsBtn = document.getElementById('backToCardsBtn');
+            const currentArtistInfo = document.getElementById('currentArtistInfo');
+            
+            let currentArtist = null;
+            const articles = {
+                'vangogh': document.getElementById('article-vangogh'),
+                'bosch': document.getElementById('article-bosch'),
+                'vermeer': document.getElementById('article-vermeer')
+            };
+            
+            const artistNames = {
+                'vangogh': 'Винсент Ван Гог',
+                'bosch': 'Иероним Босх',
+                'vermeer': 'Ян Вермеер'
+            };
+            
+            document.querySelectorAll('.artist-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const artistId = this.getAttribute('data-artist');
+                    showArtistArticle(artistId);
+                });
+            });
+            
+            function showArtistArticle(artistId) {
+                currentArtist = artistId;
+                
+                artistCards.classList.add('hide');
+                
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                if (articles[artistId]) {
+                    articles[artistId].classList.add('show');
+                }
+                
+                currentArtistInfo.textContent = `Просмотр: ${artistNames[artistId]}`;
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'inline-block';
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: articles[artistId].offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            function showArtistCards() {
+                Object.values(articles).forEach(article => {
+                    article.classList.remove('show');
+                });
+                
+                artistCards.classList.remove('hide');
+                
+                currentArtistInfo.textContent = 'Выберите художника для просмотра подробной информации';
+                viewSourceBtn.style.display = 'none';
+                backToCardsBtn.style.display = 'none';
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: artistCards.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
+            backToCardsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showArtistCards();
+            });
+            
+            viewSourceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+            
+            showArtistCards();
+        });
+    </script>
+</body>
+
+</html>
